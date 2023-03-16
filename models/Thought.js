@@ -45,7 +45,7 @@ const thoughtSchema = new Schema({
     },
 
     recations: [reactionSchema]
-}
+},
   
     {
         toJSON: {
