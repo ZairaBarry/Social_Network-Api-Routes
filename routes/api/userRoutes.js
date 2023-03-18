@@ -3,6 +3,21 @@ const {
     getUsers,
     getSingleUser,
     createUser,
-} = require('../../contolers/userController');
+    updateUser,
+    deleteUser,
+    addFriend,
+    deleteFriend,
+} = require('../../..controllers/userController');
 
-//get a 
+// api/users
+router.route('/').get(getUsers).post(createUser);
+
+// /api/students/:studentId
+router.route('/:userId').get(getSingleUser).put(updateUser).delete(deleteUser);
+
+
+///api/users/:userId/friends/:friendId
+router.router('/userId/friends/;friendId').post(addFriend).delete(deleteFriend)
+
+
+modelu.export = router;
