@@ -7,13 +7,13 @@ const {
     deleteThought,
     createReaction,
     deleteReaction,
-} = require('../../..controllers/thoughtController');
+} = require('../../controllers/thoughtController');
 
 // api/thought
 router.route('/').get(getThoughts).post(createThought);
 
 // /api/thoughts/:thoughttId
-router.route('/:thoughtId').get(getSingleThought).put(updateThought).delete(deleteThought);
+router.route('/:id').get(getSingleThought).put(updateThought).delete(deleteThought);
 
 
 ///api/thoughts/:thoughtId/reactions/
@@ -23,7 +23,7 @@ router.route('/:thoughtId/reactions/').post(createReaction);
 router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction)
 
 
-modelu.export = router;
+module.exports = router;
 
 
 
@@ -31,7 +31,3 @@ modelu.export = router;
 
 
 
-
-// /api/thoughts
-
-//  /api/thoughts/:thoughtId/reactions

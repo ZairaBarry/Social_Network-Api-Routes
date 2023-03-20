@@ -6,7 +6,7 @@ const userSchema = new Schema(
         username: {
             type: String,
             required: true,
-            max_length: 50,
+            trim: true,
             unique: true
         },
 
@@ -43,7 +43,7 @@ const userSchema = new Schema(
 
 //virtual friendCount
 userSchema.virtual('friendCount').get(function () {
-    return this.friends.length
+    return this.friends.length;
 })
 
 const User = model('User', userSchema)
