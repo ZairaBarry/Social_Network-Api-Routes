@@ -17,10 +17,10 @@ router.route('/:id').get(getSingleThought).put(updateThought).delete(deleteThoug
 
 
 ///api/thoughts/:thoughtId/reactions/
-router.route('/:thoughtId/reactions/').post(createReaction);
+router.route('/:id/reactions/').post(createReaction);
 
 ///api/thoughts/:thoughtId/reactions/:reactionId
-router.route('/:thoughtId/reactions/:reactionId').delete(deleteReaction)
+router.route('/:id/reactions/:reactionId').delete(deleteReaction)
 
 
 module.exports = router;

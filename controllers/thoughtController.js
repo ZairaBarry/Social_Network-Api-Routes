@@ -11,14 +11,15 @@ module.exports = {
 
     //get a single thought
     getSingleThought(req, res) {
-        Thought.findOne({ _id: req.params.id })
-            .populate({ path: 'reactions' })
-            .then((thought) =>
-                !thought
-                    ? res.status(404).json({ message: "No thought found with that ID" })
-                    : res.json(thought)
-            )
-            .catch((err) = res.status(500).json(err))
+        try {
+            Thought.findOne({ _id: req.params.id })
+                .populate({ path: 'reactions' })
+                .then((thought) =>
+                    !thought
+                        ? res.status(404).json({ message: "No thought found with that ID" })
+                        : res.json(thought)
+                )
+        } catch (err) { res.status(500).json(err) }
     },
 
     //create a new thought
@@ -92,11 +93,11 @@ module.exports = {
 
     },
 
-    deleteReaction(req, res) {
+    deleteReaction({ params }, res) {
         Thought.findOneAndDelete(
-            { _id: req.params.id },
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
-            { runValidators: true, new: true }
+            { _id: params.id },
+            { $pull: { reactions: { reactionId: params.reactionId } } },
+            { new: true }
         )
             .then((thought) =>
                 !thought

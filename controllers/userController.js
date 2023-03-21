@@ -66,11 +66,11 @@ module.exports = {
   },
 
   // add a new friend to user's friend list
-  addFriend(req, res) {
+  addFriend({params}, res) {
     User.findOneAndUpdate(
-      { _id: req.params.userId },
-      { $addToSet: { friends: req.params.friendId } },
-      { runValidators: true, new: true }
+      { _id: params.id },
+      { $push: { friends: params.friendId } },
+      { new: true }
     )
 
       .then((user) =>
@@ -87,7 +87,7 @@ module.exports = {
   // delete a friend droma  users' friend list
 
   deleteFriend(req, res) {
-    User.findOneAndDelete(
+    User.findOneAndUpdate(
       { _id: req.params.userId },
       { $pull: { friends: req.params.friendId } },
       { runValidators: true, new: true }
